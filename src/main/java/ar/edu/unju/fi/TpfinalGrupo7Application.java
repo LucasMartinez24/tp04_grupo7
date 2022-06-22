@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.tpfinal_grupo7;
+package ar.edu.unju.fi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
