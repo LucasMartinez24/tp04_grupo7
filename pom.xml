@@ -18,25 +18,33 @@
 	</properties>
 	<dependencies>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.0.Alpha3</version>
-		</dependency> -->
+		</dependency>
 
 
-		<!--<dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.29</version>
-		</dependency> -->
+		</dependency> 
 
 
+<<<<<<< HEAD
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>2.7.0</version>
 		</dependency>-->
+=======
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>2.7.0</version>
+		</dependency> 
+>>>>>>> origin/SebastianDiaz
 
 
 		<dependency>
