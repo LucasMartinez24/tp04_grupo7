@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,3 +96,4 @@ public class UsuarioController {
       }
       return "redirect:/lista";
     }
+}

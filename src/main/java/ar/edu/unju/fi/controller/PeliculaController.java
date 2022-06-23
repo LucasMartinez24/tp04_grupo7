@@ -31,11 +31,12 @@ public class PeliculaController {
   @Autowired
   IPeliculaService peliculaService;
 
-  @GetMapping(" /formularioPelicula")
+  @GetMapping("/formularioPelicula")
   public ModelAndView addPelicula() {
     ModelAndView vista = new ModelAndView("formulariopelicula");
     vista.addObject("pelicula", nuevaPelicula);
     vista.addObject("editMode", false);
+    return vista;
   }
 
   @PostMapping("/formularioPelicula")
@@ -46,7 +47,7 @@ public class PeliculaController {
       return "formulariopelicula";
     }
     try {
-      peliculaService.guardarPelicula(pelicula);
+      peliculaService.guardarPeliculas(pelicula);
     } catch (Exception e) {
       model.addAttribute("formUsuarioErrorMessage", e.getMessage());
       model.addAttribute("unaPelicula", pelicula);
@@ -61,7 +62,7 @@ public class PeliculaController {
   @GetMapping("/listapelicula")
   public ModelAndView getlista() {
     ModelAndView vista = new ModelAndView("listadopelicula");
-    vista.addObject("listaPelicula", peliculaService.listarpelicula());
+    vista.addObject("listaPelicula", peliculaService.listarPeliculas());
     Grupo7.info("ingresando al metodo listar pelicula");
     return vista;
   }
@@ -82,7 +83,7 @@ public class PeliculaController {
     peliculaService.modificarPelicula(pelicula);
     ;
     ModelAndView vista = new ModelAndView("Listadopelicula");
-    vista.addObject("listaPelicula", peliculaService.listarCursos());
+    vista.addObject("listaPelicula", peliculaService.listarPeliculas());
     vista.addObject("formUsuarioErrorMessage", "curso Guardado Correctamente");
     return vista;
   }
@@ -90,7 +91,7 @@ public class PeliculaController {
   @GetMapping("/eliminarpelicula/{id}")
   public String eliminar(@PathVariable Long id, Model model){
       try {
-        peliculaService.eliminarpelicula(id);
+        peliculaService.eliminarPelicula(id);
       }catch(Exception e) {
         Grupo7.error("encontrando pelicula");
         model.addAttribute("formUsuarioerrorMessage", e.getMessage());
