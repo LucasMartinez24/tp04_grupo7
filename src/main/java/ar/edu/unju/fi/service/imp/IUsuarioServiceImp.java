@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.controller.UsuarioController;
@@ -24,6 +25,9 @@ public class IUsuarioServiceImp implements IUsuarioService{
 	UsuarioRepository usuarioRepository;
 	@Override
 	public void guardarUsuario(Usuario usuario) {
+		String pw=usuario.getContraseña();
+		BCryptPasswordEncoder coder= new BCryptPasswordEncoder(4);
+		usuario.setContraseña(coder.encode(pw));
 		usuarioRepository.save(usuario);
 	}
 
