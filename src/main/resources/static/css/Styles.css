@@ -22,8 +22,8 @@ nav{
   z-index: 1000;
 }
 nav.sticky{
-  padding: 5px 100px;
-  background: #fff;
+  padding: 25px 100px;
+  background: #101419;
 }
 nav .Logo{
   position: relative;
@@ -51,6 +51,7 @@ nav ul li a{
   text-decoration: none;
   color: #fff;
   letter-spacing: 2px;
+  font-size: 20px;
   font-weight: 500px;
   transition: 0.7s;
 }
@@ -60,7 +61,4 @@ nav ul li a{
   height: 120vh;
   background-image: url(/img/unknown.png);
   background-size: cover;
-}
-nav.sticky .Logo, nav.sticky ul li a{
-  color: #000;
 }
