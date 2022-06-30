@@ -32,8 +32,28 @@ public class Usuario {
   @NotEmpty(message="No puede estar vacio")
   @Column(name = "contraseña")
   private String contraseña;
+  @NotEmpty(message = "Elija uno")
+  private String estado;
   public Usuario(){
     
+  }
+  public Usuario(
+      @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") Long dni,
+      @Size(min = 3, max = 100, message = "EL nombre de usuario debe tener 3 caracteres minimo, maximo 100") @NotEmpty(message = "El nombre de usuario no puede estar vacio") String usuario,
+      @NotEmpty(message = "El email no puede estar vacio") String email,
+      @NotEmpty(message = "No puede estar vacio") String contraseña, @NotEmpty(message = "Elija uno") String estado) {
+        super();
+    this.dni = dni;
+    this.usuario = usuario;
+    this.email = email;
+    this.contraseña = contraseña;
+    this.estado = estado;
+  }
+  public String getEstado() {
+    return estado;
+  }
+  public void setEstado(String estado) {
+    this.estado = estado;
   }
   public Long getDni() {
     return dni;
@@ -62,13 +82,5 @@ public class Usuario {
   public String getContraseña() {
     return contraseña;
   }
-  public Usuario(
-      @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") Long dni,
-      String usuario, String email, String contraseña) {
-        super();
-    this.dni = dni;
-    this.usuario = usuario;
-    this.email = email;
-    this.contraseña = contraseña;
-  }
+ 
 }
