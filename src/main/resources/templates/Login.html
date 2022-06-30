@@ -5,14 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
   <title>Login</title>
 </head>
 <body>
   <header>
     <div th:insert="/layouts/nav :: nav"></div>
   </header>
-  <section class="banner">
-
+  <section class="container">
+    <div class="blueBg">
+      <div class="box signin">
+        <h2>Ya tienes una cuenta??</h2>
+        <button class="signinBtn">Iniciar sesión</button>
+      </div>
+      <div class="box signup">
+        <h2>No tienes una cuenta??</h2>
+        <button class="signupBtn">Registrate</button>
+      </div>
+    </div>
   </section>
   <script th:src="@{/js/main.js}"></script>
 </body>
