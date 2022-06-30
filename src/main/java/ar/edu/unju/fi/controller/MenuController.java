@@ -5,12 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MenuController {
-  @GetMapping ({"/index","/Menu","/"})
+  @GetMapping({"/index","/home","/"})
   public String getmenu(){
-      return "index";
-  }
-  @GetMapping({"/login","/ingreso"})
-  public String getlogin(){
-    return "login";
+    return "index";
   }
 }
