@@ -9,4 +9,8 @@ public class MenuController {
   public String getmenu(){
     return "index";
   }
+  @GetMapping("/login")
+  public String getlogin(){
+    return "Login";
+  }
 }
