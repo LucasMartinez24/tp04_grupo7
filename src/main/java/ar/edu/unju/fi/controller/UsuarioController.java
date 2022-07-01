@@ -32,33 +32,14 @@ public class UsuarioController {
   @Autowired
   IUsuarioService usuarioService;
 
-  @GetMapping("/formulario")
+ /* @GetMapping("/formulario")
   public ModelAndView addUsuario(){
     ModelAndView vista= new ModelAndView();
-    vista.addObject("formulario");
+    vista.addObject("Login");
     vista.addObject("usuario1", listaPersona);
-    vista.addObject("editMode",false);
     return vista;
-  }
-  @PostMapping("/formulario")
-  public String saveUser(@Valid @ModelAttribute("usuario1") Usuario user, BindingResult resultado, Model model){
-    if (resultado.hasErrors()) {
-      LUCAS.fatal("Error de validación");
-      model.addAttribute("usuario1", user);
-      return "formulario";
-    }
-    try {
-      usuarioService.guardarUsuario(user);
-    } catch (Exception e) {
-      model.addAttribute("formUsuarioErrorMessage", e.getMessage());
-			model.addAttribute("unUsuario", user);
-			LUCAS.error("saliendo del metodo");
-			return "formulario";	
-    }
-    model.addAttribute("formUsuarioErrorMessage", "Usuario guardado correctamente");
-		model.addAttribute("unUsuario", user);			
-		return "formulario";
-  }
+  } */
+  
   @GetMapping("/lista")
   public ModelAndView getlista(){
     ModelAndView vista = new ModelAndView("Listado");

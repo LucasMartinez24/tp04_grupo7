@@ -23,6 +23,7 @@ public class LoginService implements UserDetailsService{
   @Override
   public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
     //busqueda del usuario
+    System.out.println(dni);
     Usuario usuarioenc = usuarioRepository.findById(Long.parseLong(dni)).orElseThrow(()-> new UsernameNotFoundException("Usuario invalido"));
     //definir autorizaciones
     List<GrantedAuthority> estados= new ArrayList<>();
