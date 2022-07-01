@@ -73,8 +73,62 @@ transition: 1.8s;
   align-items: center;
   box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
   transition: 0.7s;
+  overflow: hidden;
 }
 .formBx.active{
   left: 50%;
   transition: 0.7s;
+}
+.formBx .form{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 50px;
+  transition: 0.5s;
+}
+.formBx .signinForm{
+  transition-delay: 0.3s;
+}
+.formBx .signupForm{
+  left: 100%;
+  transition-delay: 0s;
+}
+.formBx.active .signupForm{
+  left:0;
+  transition-delay: 0.3s;
+}
+.formBx.active .signinForm{
+  left: -100%;
+}
+.formBx .form form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.formBx .form form h3{
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.formBx .form form input{
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  outline: none;
+  font-size: 16px;
+  border: 1px solid #333;
+}
+.formBx .form form input[type="submit"]{
+  background: #FF3C38;
+  border: none;
+  color: #fff;
+  max-width: 100px;
+  cursor: pointer;
+}
+.formBx.active .signupForm input[type="submit"]{
+  background: #1D3461;
+}
+.formBx .form form .forgot{
+  color: #333;
 }

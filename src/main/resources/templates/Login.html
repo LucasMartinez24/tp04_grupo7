@@ -19,11 +19,30 @@
         <button class="signinBtn">Iniciar sesión</button>
       </div>
       <div class="box signup">
-        <h2>No tienes una cuenta??</h2>
+        <h3>No tienes una cuenta??</h3>
         <button class="signupBtn">Registrate</button>
       </div>
     </div>
-    <div class="formBx"></div>
+    <div class="formBx">
+      <div class="form signinForm" >
+        <form>
+          <h3>Sign in</h3>
+          <input type="text" placeholder="Username">
+          <input type="password" placeholder="Password">
+          <input type="submit" value="Login">
+        </form>
+      </div>
+      <div class="form signupForm" >
+        <form>
+          <h3>Sign up</h3>
+          <input type="text" placeholder="Username">
+          <input type="email" placeholder="E-mail">
+          <input type="password" placeholder="Password">
+          <input type="submit" value="Register">
+          <a href="#" class="forgot">Forgot Password</a>
+        </form>
+      </div>
+    </div>
   </section>
   <script th:src="@{/js/main.js}"></script>
 </body>
