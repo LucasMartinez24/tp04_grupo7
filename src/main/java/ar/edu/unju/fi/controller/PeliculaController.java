@@ -1,9 +1,5 @@
 package ar.edu.unju.fi.controller;
 
-import javax.validation.Valid;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,88 +10,93 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.model.Pelicula;
-import ar.edu.unju.fi.service.IPeliculaService;
-import ar.edu.unju.fi.util.ListaPelicula;
+import javax.validation.Valid;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import ar.edu.unju.fi.model.Peliculas;
+import ar.edu.unju.fi.service.IPeliculasService;
+import ar.edu.unju.fi.util.ListaPeli;
 
 @Controller
 public class PeliculaController {
-  private static final Log Grupo7 = LogFactory.getLog(UsuarioController.class);
+  private static final Log LUCAS = LogFactory.getLog(UsuarioController.class);
 
   @Autowired
-  Pelicula nuevaPelicula;
+  Peliculas nuevoCurso;
 
   @Autowired
-  ListaPelicula list;
+  ListaPeli list;
 
   @Autowired
-  IPeliculaService peliculaService;
+  IPeliculasService peliculasService;
 
-  @GetMapping(" /formularioPelicula")
-  public ModelAndView addPelicula() {
-    ModelAndView vista = new ModelAndView("formulariopelicula");
-    vista.addObject("pelicula", nuevaPelicula);
+  @GetMapping("/formulariopeliculas")
+  public ModelAndView addPeli() {
+    ModelAndView vista = new ModelAndView("formulariopeliculas");
+    vista.addObject("Peli", nuevoCurso);
     vista.addObject("editMode", false);
-  }
-
-  @PostMapping("/formularioPelicula")
-  public String saveUser(@Valid @ModelAttribute("pelicula") Pelicula pelicula, BindingResult resultado, Model model) {
-    if (resultado.hasErrors()) {
-      Grupo7.fatal("Error de validación en guardar pelicula");
-      model.addAttribute("pelicula", pelicula);
-      return "formulariopelicula";
-    }
-    try {
-      peliculaService.guardarPelicula(pelicula);
-    } catch (Exception e) {
-      model.addAttribute("formUsuarioErrorMessage", e.getMessage());
-      model.addAttribute("unaPelicula", pelicula);
-      Grupo7.error("saliendo del metodo");
-      return "formulariopelicula";
-    }
-    model.addAttribute("formUsuarioErrorMessage", "curso guardado correctamente");
-    model.addAttribute("unaPelicula", pelicula);
-    return "formulariopelicula";
-  }
-
-  @GetMapping("/listapelicula")
-  public ModelAndView getlista() {
-    ModelAndView vista = new ModelAndView("listadopelicula");
-    vista.addObject("listaPelicula", peliculaService.listarpelicula());
-    Grupo7.info("ingresando al metodo listar pelicula");
     return vista;
   }
 
-  @GetMapping("/editarPelicula/{id}")
-  public ModelAndView edituser(@PathVariable(name = "id") Long id) throws Exception {
-    Pelicula peliculaencontrado = new Pelicula();
-    peliculaencontrado = peliculaService.buscarPelicula(id);
-    ModelAndView encontrado = new ModelAndView("formulariopelicula");
-    encontrado.addObject("pelicula", peliculaencontrado);
-    Grupo7.fatal("Saliendo del metodo encontrando pelicula");
-    encontrado.addObject("editmode", true);
+  @PostMapping("/formulariopeliculas")
+  public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas, BindingResult resultado, Model model) {
+    LUCAS.info(resultado.getFieldError());
+    if (resultado.hasErrors()) {
+      LUCAS.fatal("Error de validación en guardar peli");
+      model.addAttribute("Peli", peliculas);
+      return "formulariopeliculas";
+    }
+    try {
+      peliculasService.guardarPeliculas(peliculas);
+    } catch (Exception e) {
+      model.addAttribute("formUsuarioErrorMessage", e.getMessage());
+      model.addAttribute("unaPeli", peliculas);
+      LUCAS.error("saliendo del metodo");
+      return "formulariopeliculas";
+    }
+    model.addAttribute("formUsuarioErrorMessage", "curso guardado correctamente");
+    model.addAttribute("unaPeli", peliculas);
+    return "formulariopeliculas";
+  }
+
+  @GetMapping("/listapeliculas")
+  public ModelAndView getlista() {
+    ModelAndView vista = new ModelAndView("ListadoPe");
+    vista.addObject("listaPelis", peliculasService.listarPeliculas());
+    LUCAS.info("Ingresando al metodo listar Pelis");
+    return vista;
+  }
+
+  @GetMapping("/editarPeli/{id}")
+  public ModelAndView editPeli(@PathVariable(name = "id") Long id) throws Exception {
+    Peliculas peliculaencontrada = new Peliculas();
+    peliculaencontrada = peliculasService.buscarPeliculas(id);
+    ModelAndView encontrado = new ModelAndView("formulariopeliculas");
+    encontrado.addObject("Peli", peliculaencontrada);
+    LUCAS.fatal("Saliendo del metodo encontrado");
+    encontrado.addObject("editMode", true);
     return encontrado;
   }
 
-  @PostMapping("/modificarPelicula")
-  public ModelAndView modUser(@ModelAttribute("Pelicula") Pelicula pelicula) {
-    peliculaService.modificarPelicula(pelicula);
-    ;
-    ModelAndView vista = new ModelAndView("Listadopelicula");
-    vista.addObject("listaPelicula", peliculaService.listarCursos());
-    vista.addObject("formUsuarioErrorMessage", "curso Guardado Correctamente");
+  @PostMapping("/modificarpeliculas")
+  public ModelAndView modPeli(@ModelAttribute("peli") Peliculas peliculas) {
+    peliculasService.guardarPeliculas(peliculas);
+    ModelAndView vista = new ModelAndView("ListadoPe");
+    vista.addObject("listaPelis", peliculasService.listarPeliculas());
+    vista.addObject("formUsuarioErrorMessage", "Peli Guardada Correctamente");
     return vista;
   }
 
-  @GetMapping("/eliminarpelicula/{id}")
-  public String eliminar(@PathVariable Long id, Model model){
-      try {
-        peliculaService.eliminarpelicula(id);
-      }catch(Exception e) {
-        Grupo7.error("encontrando pelicula");
-        model.addAttribute("formUsuarioerrorMessage", e.getMessage());
-        return "redirect:/formulariopelicula";
-      }
-      return "redirect:/listapelicula";
+  @GetMapping("/eliminarPeli/{id}")
+  public String eliminar(@PathVariable Long id, Model model) {
+    try {
+      peliculasService.eliminarPeliculas(id);;
+    } catch (Exception e) {
+      LUCAS.error("encontrando curso");
+      model.addAttribute("formUsuarioErrorMessage", e.getMessage());
+      return "redirect:/formulariopeliculas";
+    }
+    return "redirect:/listapeliculas";
   }
 }

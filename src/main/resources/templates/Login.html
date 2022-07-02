@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+  <title>Login</title>
+</head>
+<body>
+  <header>
+    <div th:insert="/layouts/nav :: nav"></div>
+  </header>
+  <section class="container">
+    <div class="blueBg">
+      <div class="box signin">
+        <h2>Ya tienes una cuenta??</h2>
+        <button class="signinBtn">Iniciar sesión</button>
+      </div>
+      <div class="box signup">
+        <h3>No tienes una cuenta??</h3>
+        <button class="signupBtn">Registrate</button>
+      </div>
+    </div>
+    <div class="formBx">
+      <div class="form signinForm" >
+        <form th:action="@{/login}" method="post">
+          <h3>Sign in</h3>
+          <input type="text" placeholder="DNI" name="dni">
+          <input type="password" placeholder="Password" name="contraseña">
+          <input type="submit" value="Login">
+        </form>
+      </div>
+      <div class="form signupForm" >
+        <form th:object="${usuario1}" th:action="@{/formulario}" method="post">
+          <h3>Sign up</h3>
+          <input th:field="*{usuario}" type="text" placeholder="Username">
+          <input th:field="*{dni}" type="number" placeholder="Ingrese su DNI">
+          <input th:field="*{email}" type="email" placeholder="E-mail">
+          <input th:field="*{contraseña}" type="password" placeholder="Password">
+          <select th:field="*{estado}" name="Tipo">
+            <option value="Admin">Admin</option>
+            <option value="Cliente">Cliente</option>
+          </select>
+          <input type="submit" value="Register">
+          <a href="#" class="forgot">Forgot Password</a>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
