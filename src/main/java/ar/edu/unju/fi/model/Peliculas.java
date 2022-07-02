@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -21,7 +22,7 @@ public class Peliculas {
   @Id
   @GeneratedValue
   (strategy=GenerationType.IDENTITY)
-  @Column (nullable = true)
+  @Column (name = "idPelis", nullable = true)
   private Long id;
   @Size(min=3, max=100, message="EL nombre debe tener 3 caracteres minimo, maximo 100")
 	@NotEmpty(message="El nombre no puede estar vacio")
@@ -34,9 +35,7 @@ public class Peliculas {
   @Min(value=1000000,message = "El DNI debe ser mayor al millon")
   @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
   private String duracion;
-  @NotEmpty
-  @Min(value=1000000,message = "El DNI debe ser mayor al millon")
-  @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
+  @Lob
   private String portada;
   @NotEmpty
   @Min(value=1000000,message = "El DNI debe ser mayor al millon")

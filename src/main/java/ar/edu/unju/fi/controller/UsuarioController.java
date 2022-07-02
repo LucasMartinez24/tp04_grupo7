@@ -32,13 +32,13 @@ public class UsuarioController {
   @Autowired
   IUsuarioService usuarioService;
 
- /* @GetMapping("/formulario")
+  @GetMapping("/formulario")
   public ModelAndView addUsuario(){
     ModelAndView vista= new ModelAndView();
     vista.addObject("Login");
     vista.addObject("usuario1", listaPersona);
     return vista;
-  } */
+  }
   
   @GetMapping("/lista")
   public ModelAndView getlista(){
