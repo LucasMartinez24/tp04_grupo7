@@ -13,6 +13,27 @@ body{
 body.active{
   background: #1D3461;
 }
+section::before{
+  z-index: -100;
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(#ffeb3b,#e91e63);
+  border-radius: 50%;
+  transform: translate(-230px,-160px);
+}
+
+section::after{
+  z-index: -100;
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(#2196f3,#83d8ff);
+  border-radius: 50%;
+  transform: translate(700px,230px);
+}
 .container{
   position: relative;
   width: 800px;
@@ -21,6 +42,7 @@ body.active{
   margin-top: 200px;
 }
 .blueBg{
+  backdrop-filter: blur(10px);
   position: absolute;
   top: 40px;
   width: 100%;

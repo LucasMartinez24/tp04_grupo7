@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/formpelis.css}">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div th:insert="/layouts/nav :: nav"></div>
+  </header>
+  <section>
+    <div class="container">
+      <h2>Agregar una Pelicula</h2>
+      <div class="row100">
+        <div class="col">
+          <div class="inputBox">
+            <input type="text" required="required">
+            <span>Nombre de pelicula</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="inputBox">
+            <input type="text" required="required">
+            <span>Nombre de pelicula</span>
+          </div>
+        </div>
+      </div>
+      <div class="row100">
+        <div class="col">
+          <div class="inputBox">
+            <input type="text" required="required">
+            <span>Nombre de pelicula</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="inputBox">
+            <input type="text" required="required">
+            <span>Nombre de pelicula</span>
+          </div>
+        </div>
+      </div>
+      <div class="row100">
+        <div class="col">
+          <div class="inputBox textarea">
+            <textarea required="required"></textarea>
+            <span>Ingrese la descripción</span>
+          </div>
+        </div>
+      </div>
+      <div class="row100">
+        <div class="col">
+          <input type="submit">
+        </div>
+      </div>
+    </div>
+  </section>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
