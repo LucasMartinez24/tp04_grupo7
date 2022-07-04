@@ -1,14 +1,10 @@
 package ar.edu.unju.fi.controller;
 
-
-import javax.validation.Valid;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +28,13 @@ public class UsuarioController {
   @Autowired
   IUsuarioService usuarioService;
 
- /* @GetMapping("/formulario")
+  @GetMapping("/formulario")
   public ModelAndView addUsuario(){
     ModelAndView vista= new ModelAndView();
     vista.addObject("Login");
     vista.addObject("usuario1", listaPersona);
     return vista;
-  } */
+  }
   
   @GetMapping("/lista")
   public ModelAndView getlista(){

@@ -20,7 +20,7 @@ public class Autentication implements AuthenticationSuccessHandler{
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,Authentication authentication) throws IOException, ServletException {
     Boolean cliente=false,admin=false;
-    Collection<?extends GrantedAuthority> authorities =        authentication.getAuthorities();
+    Collection<?extends GrantedAuthority> authorities = authentication.getAuthorities();
     for(GrantedAuthority grantedAuthority:authorities){
       if(grantedAuthority.getAuthority().equals("Cliente")){
         cliente=true;

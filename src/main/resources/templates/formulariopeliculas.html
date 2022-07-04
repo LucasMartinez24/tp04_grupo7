@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/formpelis.css}">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div th:insert="/layouts/nav :: nav"></div>
+  </header>
+  <form th:action="@{/formulariopeliculas}" th:object="${Peli}">
+    <div class="container">
+      <h2>Agregar una Pelicula</h2>
+      <div class="row100">
+        <div class="col">
+          <div class="inputBox">
+            <input th:field="*{titulo}" type="text" required="required">
+            <span>Titulo de la pelicula</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="inputBox">
+            <input th:field="*{genero}" type="text" required="required">
+            <span>Genero de la pelicula</span>
+          </div>
+        </div>
+      </div>
+      <div class="row100">
+        <div class="col">
+          <div class="inputBox">
+            <input type="text" required="required" th:field="*{duracion}">
+            <span>Duración de la pelicula</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="inputBox">
+            <input th:field="*{sala}" type="number" required="required">
+            <span>Numero de la sala</span>
+          </div>
+        </div>
+      </div>
+      <div class="row100">
+        <div class="col">
+          <div class="inputBox textarea">
+            <textarea th:field="*{descripcion}" required="required"></textarea>
+            <span>Ingrese la descripción</span>
+          </div>
+        </div>
+        <div class="col">
+          <button class="contenedor">
+            <label for="btn-file">Adjuntar img de la portada</label>
+            <input th:field="*{portada}" type="file">
+          </button>
+        </div>
+      </div>
+      <div class="row100">
+        <div class="col">
+          <input type="submit">
+        </div>
+      </div>
+    </div>
+  </form>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
