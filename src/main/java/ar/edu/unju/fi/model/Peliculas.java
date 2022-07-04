@@ -35,23 +35,26 @@ public class Peliculas {
   @Min(value=1000000,message = "El DNI debe ser mayor al millon")
   @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
   private String duracion;
+  @NotEmpty
+  private Long sala;
   @Lob
   private String portada;
   @NotEmpty
   @Min(value=1000000,message = "El DNI debe ser mayor al millon")
   @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
   private String descripcion;
+  
   public Peliculas(Long id,
       @Size(min = 3, max = 100, message = "EL nombre debe tener 3 caracteres minimo, maximo 100") @NotEmpty(message = "El nombre no puede estar vacio") String titulo,
       @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String genero,
       @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String duracion,
-      @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String portada,
+      @NotEmpty Long sala, String portada,
       @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String descripcion) {
-        super();
     this.id = id;
     this.titulo = titulo;
     this.genero = genero;
     this.duracion = duracion;
+    this.sala = sala;
     this.portada = portada;
     this.descripcion = descripcion;
   }
@@ -94,5 +97,10 @@ public class Peliculas {
   public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
   }
-  
+  public Long getSala() {
+    return sala;
+  }
+  public void setSala(Long sala) {
+    this.sala = sala;
+  }
 }

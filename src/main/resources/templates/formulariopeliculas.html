@@ -12,43 +12,49 @@
   <header>
     <div th:insert="/layouts/nav :: nav"></div>
   </header>
-  <section>
+  <form th:action="@{/formulariopeliculas}" th:object="${Peli}">
     <div class="container">
       <h2>Agregar una Pelicula</h2>
       <div class="row100">
         <div class="col">
           <div class="inputBox">
-            <input type="text" required="required">
-            <span>Nombre de pelicula</span>
+            <input th:field="*{titulo}" type="text" required="required">
+            <span>Titulo de la pelicula</span>
           </div>
         </div>
         <div class="col">
           <div class="inputBox">
-            <input type="text" required="required">
-            <span>Nombre de pelicula</span>
+            <input th:field="*{genero}" type="text" required="required">
+            <span>Genero de la pelicula</span>
           </div>
         </div>
       </div>
       <div class="row100">
         <div class="col">
           <div class="inputBox">
-            <input type="text" required="required">
-            <span>Nombre de pelicula</span>
+            <input type="text" required="required" th:field="*{duracion}">
+            <span>Duración de la pelicula</span>
           </div>
         </div>
         <div class="col">
           <div class="inputBox">
-            <input type="text" required="required">
-            <span>Nombre de pelicula</span>
+            <input th:field="*{sala}" type="number" required="required">
+            <span>Numero de la sala</span>
           </div>
         </div>
       </div>
       <div class="row100">
         <div class="col">
           <div class="inputBox textarea">
-            <textarea required="required"></textarea>
+            <textarea th:field="*{descripcion}" required="required"></textarea>
             <span>Ingrese la descripción</span>
           </div>
+        </div>
+        <div class="col">
+          <button class="contenedor">
+            <label for="btn-file">Adjuntar img de la portada</label>
+            <input th:field="*{portada}" type="file">
+          </button>
         </div>
       </div>
       <div class="row100">
@@ -57,7 +63,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </form>
   <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
