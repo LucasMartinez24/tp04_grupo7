@@ -27,7 +27,7 @@ public class PeliculaController {
   private static final Log LUCAS = LogFactory.getLog(UsuarioController.class);
 
   @Autowired
-  Peliculas nuevoCurso;
+  Peliculas peliculas;
 
   @Autowired
   ListaPeli list;
@@ -38,24 +38,23 @@ public class PeliculaController {
   @GetMapping("/formulariopeliculas")
   public ModelAndView addPeli() {
     ModelAndView vista = new ModelAndView("formulariopeliculas");
-    vista.addObject("Peli", nuevoCurso);
-    vista.addObject("editMode", false);
+    vista.addObject("Peli", peliculas);
     return vista;
   }
 
-  @PostMapping(value="/formulariopeliculas", consumes = "multipart/form-data")
+  @PostMapping(value="/formulariopeliculas",consumes= "multipart/form-data")
   public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas, BindingResult resultado,@RequestParam("file") MultipartFile file, Model model) {
-    LUCAS.info(resultado.getFieldError());
+    LUCAS.info(peliculas.getId());
     if (resultado.hasErrors()) {
       LUCAS.fatal("Error de validación en guardar peli");
       model.addAttribute("Peli", peliculas);
       return "formulariopeliculas";
     }
     try {
+      LUCAS.info("Guardando...");
       byte[] content = file.getBytes();
-String base64 = Base64.getEncoder().encodeToString(content);
-peliculas.setImagen(base64);
-peliculas.setEstado(true);
+      String base64 = Base64.getEncoder().encodeToString(content);
+      peliculas.setPortada(base64);
       peliculasService.guardarPeliculas(peliculas);
     } catch (Exception e) {
       model.addAttribute("formUsuarioErrorMessage", e.getMessage());
@@ -66,10 +65,6 @@ peliculas.setEstado(true);
     model.addAttribute("formUsuarioErrorMessage", "curso guardado correctamente");
     model.addAttribute("unaPeli", peliculas);
     return "formulariopeliculas";
-  }
-
-  private Object Encoder() {
-    return null;
   }
   @GetMapping("/listapeliculas")
   public ModelAndView getlista() {

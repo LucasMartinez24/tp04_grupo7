@@ -103,8 +103,4 @@ public class Peliculas {
   public void setSala(Long sala) {
     this.sala = sala;
   }
-  public void setImagen(String base64) {
-  }
-public void setEstado(boolean b) {
-}
 }

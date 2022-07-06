@@ -12,7 +12,7 @@
   <header>
     <div th:insert="/layouts/nav :: nav"></div>
   </header>
-  <form th:action="@{/formulariopeliculas}" th:object="${Peli}">
+  <form th:object="${Peli}" th:action="@{/formulariopeliculas}" method="post" enctype="multipart/form-data">
     <div class="container">
       <h2>Agregar una Pelicula</h2>
       <div class="row100">
@@ -53,7 +53,8 @@
         <div class="col">
           <button class="contenedor">
             <label for="btn-file">Adjuntar img de la portada</label>
-            <input th:field="*{portada}" type="file">
+            <input type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg"
+            onchange="loadFile(event)">
           </button>
         </div>
       </div>
