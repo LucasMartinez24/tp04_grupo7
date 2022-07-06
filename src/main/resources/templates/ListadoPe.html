@@ -7,6 +7,15 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <tr th:each="c:${listaPelis}" class="text-center">
+    <td th:text="${c.id}"></td>
+    <td th:text="${c.titulo}"></td>
+    <td><img th:src="${'data:image/jpg;base64,'+c.portada}" alt="" /></td>
+    <td><a class="btn btn-warning" href="#"
+      >Editar</a> 
+      <a class="link-eliminar" href="#">
+      <i class="btn btn-secondary fa fa-trash-alt"></i></a>
+    </td>
+  </tr>
 </body>
 </html>
