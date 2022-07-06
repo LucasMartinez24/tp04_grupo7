@@ -10,9 +10,10 @@
 </head>
 <body>
   <header>
-    <div th:insert="/layouts/nav :: nav"></div>
+    <div th:insert="/layouts/navadmin :: nav"></div>
   </header>
-  <form th:object="${Peli}" th:action="@{/formulariopeliculas}" method="post" enctype="multipart/form-data">
+  <form th:object="${Peli}" th:action="${editMode}?@{/modificarpeliculas}:@{/formulariopeliculas}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}">
     <div class="container">
       <h2>Agregar una Pelicula</h2>
       <div class="row100">
@@ -52,15 +53,14 @@
         </div>
         <div class="col">
           <button class="contenedor">
-            <label for="btn-file">Adjuntar img de la portada</label>
-            <input type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg"
-            onchange="loadFile(event)">
+            <label for="btn-file" th:text="${editMode}?'Agregue portada nuevamente':'Adjuntar img de la portada'"></label>
+            <input type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg,image/png,image/jpg" onchange="loadFile(event)">
           </button>
         </div>
       </div>
       <div class="row100">
         <div class="col">
-          <input type="submit">
+          <button type="submit"> <span th:text="${editMode}?'Modificar':'Guardar'"></span> </button>
         </div>
       </div>
     </div>

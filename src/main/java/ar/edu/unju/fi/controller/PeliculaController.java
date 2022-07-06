@@ -24,7 +24,7 @@ import ar.edu.unju.fi.util.ListaPeli;
 
 @Controller
 public class PeliculaController {
-  private static final Log LUCAS = LogFactory.getLog(UsuarioController.class);
+  private static final Log LUCAS = LogFactory.getLog(PeliculaController.class);
 
   @Autowired
   Peliculas peliculas;
@@ -39,6 +39,7 @@ public class PeliculaController {
   public ModelAndView addPeli() {
     ModelAndView vista = new ModelAndView("formulariopeliculas");
     vista.addObject("Peli", peliculas);
+    vista.addObject("editMode",false);
     return vista;
   }
 
@@ -64,11 +65,18 @@ public class PeliculaController {
     }
     model.addAttribute("formUsuarioErrorMessage", "curso guardado correctamente");
     model.addAttribute("unaPeli", peliculas);
-    return "formulariopeliculas";
+    return "redirect:/listapeliculas2";
   }
   @GetMapping("/listapeliculas")
   public ModelAndView getlista() {
     ModelAndView vista = new ModelAndView("ListadoPe");
+    vista.addObject("listaPelis", peliculasService.listarPeliculas());
+    LUCAS.info("Ingresando al metodo listar Pelis");
+    return vista;
+  }
+  @GetMapping("/listapeliculas2")
+  public ModelAndView getlista2() {
+    ModelAndView vista = new ModelAndView("ListadoPe2");
     vista.addObject("listaPelis", peliculasService.listarPeliculas());
     LUCAS.info("Ingresando al metodo listar Pelis");
     return vista;
@@ -80,15 +88,26 @@ public class PeliculaController {
     peliculaencontrada = peliculasService.buscarPeliculas(id);
     ModelAndView encontrado = new ModelAndView("formulariopeliculas");
     encontrado.addObject("Peli", peliculaencontrada);
-    LUCAS.fatal("Saliendo del metodo encontrado");
+    LUCAS.fatal("Saliendo del metodo encontrado pelis ");
     encontrado.addObject("editMode", true);
     return encontrado;
   }
 
-  @PostMapping("/modificarpeliculas")
-  public ModelAndView modPeli(@ModelAttribute("peli") Peliculas peliculas) {
-    peliculasService.guardarPeliculas(peliculas);
-    ModelAndView vista = new ModelAndView("ListadoPe");
+  @PostMapping(value="/modificarpeliculas",consumes= "multipart/form-data")
+  public ModelAndView modPeli(@ModelAttribute("Peli") Peliculas peliculas,@RequestParam("file") MultipartFile file, Model model) {
+    ModelAndView vista2 = new ModelAndView("formulariopeliculas");
+    try{
+      byte[] content = file.getBytes();
+      String base64 = Base64.getEncoder().encodeToString(content);
+      peliculas.setPortada(base64);
+      peliculasService.modificarPeliculas(peliculas);
+    }catch(Exception e){
+      model.addAttribute("formUsuarioErrorMessage", e.getMessage());
+      model.addAttribute("unaPeli", peliculas);
+      LUCAS.error("saliendo del metodo");
+      return vista2;
+    }
+    ModelAndView vista = new ModelAndView("ListadoPe2");
     vista.addObject("listaPelis", peliculasService.listarPeliculas());
     vista.addObject("formUsuarioErrorMessage", "Peli Guardada Correctamente");
     return vista;
@@ -103,6 +122,6 @@ public class PeliculaController {
       model.addAttribute("formUsuarioErrorMessage", e.getMessage());
       return "redirect:/formulariopeliculas";
     }
-    return "redirect:/listapeliculas";
+    return "redirect:/listapeliculas2";
   }
 }

@@ -74,7 +74,7 @@ form::after{
   padding: 0 10px;
   margin: 15px 0 10px;
 }
-.container .row100 .col input[type="submit"]{
+.container .row100 .col button[type="submit"]{
   border: none;
   padding: 10px 40px;
   cursor: pointer;

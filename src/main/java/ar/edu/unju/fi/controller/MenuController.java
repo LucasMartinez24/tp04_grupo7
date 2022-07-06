@@ -27,6 +27,14 @@ public class MenuController {
   public String getmenu(){
     return "index";
   }
+  @GetMapping({"/index2","/home2"})
+  public String getmenu2(){
+    return "index2";
+  }
+  @GetMapping({"/index3","/home3"})
+  public String getmenu3(){
+    return "index3";
+  }
   @GetMapping("/login")
   public ModelAndView getlogin(){
     grupo7.info("bienvenido");
