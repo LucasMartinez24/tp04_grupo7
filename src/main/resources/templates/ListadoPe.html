@@ -4,18 +4,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/listpelis.css}">
+  <link rel="stylesheet" th:href="@{/css/swiper-bundle.min.css}"/>
   <title>Document</title>
 </head>
 <body>
-  <tr th:each="c:${listaPelis}" class="text-center">
-    <td th:text="${c.id}"></td>
-    <td th:text="${c.titulo}"></td>
-    <td><img th:src="${'data:image/jpg;base64,'+c.portada}" alt="" /></td>
-    <td><a class="btn btn-warning" href="#"
-      >Editar</a> 
-      <a class="link-eliminar" href="#">
-      <i class="btn btn-secondary fa fa-trash-alt"></i></a>
-    </td>
-  </tr>
+  <header>
+    <div th:insert="/layouts/nav :: nav"></div>
+  </header>
+  <section class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide card">
+        <div class="imgBx">
+          <img src="/img/back_to_the_future.jpg">
+        </div>
+        <div class="content">
+          <div class="details">
+            <h2>Volver al futuro<br><span>Ciencia Ficcion</span></h2>
+            <div class="data">
+              <h3>142m<br><span>Duracion</span></h3>
+              <h3>1<br><span>Sala</span></h3>
+            </div>
+            <div class="actionBtn">
+              <button>Comprar</button>
+              <button>Descripción</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </section>
+  
+  <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/swiper-bundle.min.js}"></script>
+  <script th:src="@{/js/carru.js}"></script>
 </body>
 </html>
