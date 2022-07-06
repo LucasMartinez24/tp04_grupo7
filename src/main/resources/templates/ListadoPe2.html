@@ -27,8 +27,8 @@
               <span class="aux"><h3 th:text="${p.sala}"></h3><span>Sala</span></span>
             </div>
             <div class="actionBtn">
-              <button>Editar</button>
-              <button>Eliminar</button>
+              <button><a th:href="@{'/editarPeli/' + ${p.id}}">Editar</a></button>
+              <button><a class="hero_cta" th:onclick="'confirmarEliminar(\''+${p.id}+'\');'">Eliminar</a></button>
             </div>
           </div>
         </div>
@@ -37,9 +37,21 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </section>
-  
+  <section class="modal" id="modalEliminar">
+    <div class="modal_container">
+        <h2 class="modal_title" id="eliminarModalTitulo">Confirmar eliminar</h2>
+        <p class="modal_paragraph">¿Seguro quiere eliminar este curso?</p>
+        <form>
+          <input type="text" id="identificadorDePelicula">
+        </form>
+        <button type="button" th:onclick="eliminarPelicula()">Si, Borrar</button>
+        <a href="#" class="modal_close">Cerrar Modal</a>
+    </div>
+  </section>
   <script th:src="@{/js/main.js}"></script>
   <script th:src="@{/js/swiper-bundle.min.js}"></script>
   <script th:src="@{/js/carru.js}"></script>
+  <script th:src="@{/js/modallist.js}"></script>
+  <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>
