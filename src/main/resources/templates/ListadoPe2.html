@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/listpelis.css}">
+  <link rel="stylesheet" th:href="@{/css/swiper-bundle.min.css}"/>
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div th:insert="/layouts/navadmin :: nav"></div>
+  </header>
+  <section class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide card" th:each="p : ${listaPelis}">
+        <div class="imgBx">
+          <img th:src="${'data:image/jpg;base64,'+p.portada}">
+        </div>
+        <div class="content">
+          <div class="details">
+            <h2 th:text="${p.titulo}"></h2><span class="aux2" th:text="${p.genero}"></span>
+            <div class="data">
+              <span class="aux"><h3 th:text="${p.duracion}"></h3><span>Duracion</span></span>
+              <span class="aux"><h3 th:text="${p.sala}"></h3><span>Sala</span></span>
+            </div>
+            <div class="actionBtn">
+              <button>Editar</button>
+              <button>Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </section>
+  
+  <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/swiper-bundle.min.js}"></script>
+  <script th:src="@{/js/carru.js}"></script>
+</body>
+</html>

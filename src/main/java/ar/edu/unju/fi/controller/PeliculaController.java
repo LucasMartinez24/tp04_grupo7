@@ -73,6 +73,13 @@ public class PeliculaController {
     LUCAS.info("Ingresando al metodo listar Pelis");
     return vista;
   }
+  @GetMapping("/listapeliculas2")
+  public ModelAndView getlista2() {
+    ModelAndView vista = new ModelAndView("ListadoPe2");
+    vista.addObject("listaPelis", peliculasService.listarPeliculas());
+    LUCAS.info("Ingresando al metodo listar Pelis");
+    return vista;
+  }
 
   @GetMapping("/editarPeli/{id}")
   public ModelAndView editPeli(@PathVariable(name = "id") Long id) throws Exception {
