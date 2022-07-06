@@ -9,15 +9,17 @@ body{
   min-height: 100vh;
   background: linear-gradient(45deg,#fbda61,#ff5acd);
 }
+.swiper{
+  width: 1300px;
+}
 .card{
-  margin-top: 260px;
+  margin-top: 220px;
   position: relative;
   width: 350px;
   height: 190px;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
-  transition: 0.5s;
+  transition: 0.8s;
 }
 .card:hover{
   height: 450px;
@@ -37,7 +39,7 @@ body{
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
   overflow: hidden;
-  transition: 0.5s;
+  transition: 0.8s;
 }
 .imgBx img{
   position: absolute;
@@ -60,7 +62,7 @@ body{
   padding: 30px;
   text-align: center;
   width: 100%;
-  transition: 0.5s;
+  transition: 0.8s;
   transform: translateY(140px);
 }
 .card:hover .content .details{
