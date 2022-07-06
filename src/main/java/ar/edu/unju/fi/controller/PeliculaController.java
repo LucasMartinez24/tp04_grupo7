@@ -42,7 +42,7 @@ public class PeliculaController {
     vista.addObject("editMode", false);
     return vista;
   }
-//guardar imagenes
+
   @PostMapping(value="/formulariopeliculas", consumes = "multipart/form-data")
   public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas, BindingResult resultado,@RequestParam("file") MultipartFile file, Model model) {
     LUCAS.info(resultado.getFieldError());
