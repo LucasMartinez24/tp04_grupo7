@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Base64;
 
 import javax.validation.Valid;
 
@@ -38,9 +42,9 @@ public class PeliculaController {
     vista.addObject("editMode", false);
     return vista;
   }
-
-  @PostMapping("/formulariopeliculas")
-  public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas, BindingResult resultado, Model model) {
+//guardar imagenes
+  @PostMapping(value="/formulariopeliculas", consumes = "multipart/form-data")
+  public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas, BindingResult resultado,@RequestParam("file") MultipartFile file, Model model) {
     LUCAS.info(resultado.getFieldError());
     if (resultado.hasErrors()) {
       LUCAS.fatal("Error de validación en guardar peli");
@@ -48,6 +52,10 @@ public class PeliculaController {
       return "formulariopeliculas";
     }
     try {
+      byte[] content = file.getBytes();
+String base64 = Base64.getEncoder().encodeToString(content);
+peliculas.setImagen(base64);
+peliculas.setEstado(true);
       peliculasService.guardarPeliculas(peliculas);
     } catch (Exception e) {
       model.addAttribute("formUsuarioErrorMessage", e.getMessage());
@@ -60,6 +68,9 @@ public class PeliculaController {
     return "formulariopeliculas";
   }
 
+  private Object Encoder() {
+    return null;
+  }
   @GetMapping("/listapeliculas")
   public ModelAndView getlista() {
     ModelAndView vista = new ModelAndView("ListadoPe");
