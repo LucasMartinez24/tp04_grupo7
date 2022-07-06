@@ -17,9 +17,9 @@ th, td{
 }
 
 thead{
-	background-color: #246355;
-	border-bottom: solid 5px #0F362D;
-	color: black;
+	background-color: #828277;
+	border-bottom: solid 5px #2a346e;
+	color: rgb(0, 0, 0);
 }
 
 tr:nth-child(even){
@@ -27,7 +27,7 @@ tr:nth-child(even){
 }
 
 tr:hover td{
-	background-color: #369681;
+	background-color: #4b5394;
 	color: black;
 }
 
@@ -35,17 +35,19 @@ button{
   width: 100%;
   height: 45px;
   margin: 5px;
-  background:  #202157;
-  color:  #ffffff;
+  background:  #d1d1df;
+  color:  #f93426;
   border-radius: 25px;
-  border: 1px solid #202157;
+  border: 1px solid #0c0c0c;
   font-family: 'Quicksand';
   font-size: 16px;
   letter-spacing: 0.6px;
   font-weight: 600;
   cursor: pointer;
 }
-
+button a{
+text-decoration: none;
+}
 .modal{
   position: fixed;
   top: 0;
@@ -108,4 +110,9 @@ button{
 .modal_close:hover{
   color: #F26250;
   background-color: #fff;
+}
+
+body{
+    background: url(/img/bglista2.jpg) ;
+   
 }
