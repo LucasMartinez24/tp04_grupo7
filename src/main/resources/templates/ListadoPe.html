@@ -11,20 +11,20 @@
 </head>
 <body>
   <header>
-    <div th:insert="/layouts/nav :: nav"></div>
+    <div th:insert="/layouts/navcliente :: nav"></div>
   </header>
   <section class="swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide card">
+      <div class="swiper-slide card" th:each="p : ${listaPelis}">
         <div class="imgBx">
-          <img src="/img/back_to_the_future.jpg">
+          <img th:src="${'data:image/jpg;base64,'+p.portada}">
         </div>
         <div class="content">
           <div class="details">
-            <h2>Volver al futuro<br><span>Ciencia Ficcion</span></h2>
+            <h2 th:text="${p.titulo}"></h2><span class="aux2" th:text="${p.genero}"></span>
             <div class="data">
-              <h3>142m<br><span>Duracion</span></h3>
-              <h3>1<br><span>Sala</span></h3>
+              <span class="aux"><h3 th:text="${p.duracion}"></h3><span>Duracion</span></span>
+              <span class="aux"><h3 th:text="${p.sala}"></h3><span>Sala</span></span>
             </div>
             <div class="actionBtn">
               <button>Comprar</button>

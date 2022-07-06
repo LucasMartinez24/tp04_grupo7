@@ -7,32 +7,12 @@ body{
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #FF3C38;
-  transition: 0.5s;
+  background: linear-gradient(45deg,#ffd900,#6200ff) ;
+  transition: 0.8s;
 }
 body.active{
-  background: #1D3461;
-}
-section::before{
-  z-index: -100;
-  content: '';
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(#ffeb3b,#e91e63);
-  border-radius: 50%;
-  transform: translate(-230px,-160px);
-}
+  background: linear-gradient(45deg,#6200ff,#ffd900);
 
-section::after{
-  z-index: -100;
-  content: '';
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(#2196f3,#83d8ff);
-  border-radius: 50%;
-  transform: translate(700px,230px);
 }
 .container{
   position: relative;
@@ -142,14 +122,15 @@ transition: 1.8s;
   border: 1px solid #333;
 }
 .formBx .form form input[type="submit"]{
-  background: #FF3C38;
-  border: none;
+  background: #6200ff;
   color: #fff;
+  border: none;
   max-width: 100px;
   cursor: pointer;
 }
 .formBx.active .signupForm input[type="submit"]{
-  background: #1D3461;
+  background: #ffd900;
+  color: #000;
 }
 .formBx .form form .forgot{
   color: #333;
