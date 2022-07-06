@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link th:href="@{/css/listausuario.css}" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title> Login </title>
+</head>
+<body>
+  <header>
+    <div th:insert="/layouts/nav :: nav"></div>
+  </header>
+  <section id="main-container">
+    <div th:if="${formUsuarioErrorMessage}" th:text="${formUsuarioErrorMessage}">Name Error</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th><th>E-mail</th><th>DNI</th><th>Botones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:if="${listaUsuario.empty}">
+            <td>No hay usuarios cargados</td>
+          </tr>
+          <tr th:each="u : ${listaUsuario}">
+            <td th:text="${u.usuario}"></td>
+            <td th:text="${u.email}"></td>
+            <td th:text="${u.dni}"></td>
+            <td>
+              <button><a th:href="@{'/editarUsuario/' + ${u.dni}}">editar</a></button>
+              <button><a class="hero_cta"th:onclick="'confirmarEliminar(\''+${u.dni}+'\');'">eliminar</a></button>
+            </td>
+          </tr>
+        </tbody>
+        
+      </table>
+  </section>
+  <section class="modal" id="modalEliminar">
+    <div class="modal_container">
+        <h2 class="modal_title" id="eliminarModalTitulo">Confirmar eliminar</h2>
+        <p class="modal_paragraph">¿Seguro quiere eliminar este Usuario?</p>
+        <form>
+          <input type="text" id="identificadorDeUsuario">
+        </form>
+        <button type="button" th:onclick="eliminarUsuario()">Si, Borrar</button>
+        <a href="#" class="modal_close">Cerrar Modal</a>
+    </div>
+</section>
+  <footer>
+    
+  </footer>
+<script th:src="@{js/main.js}"></script>
+<script th:src="@{js/modal.js}"></script>
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</html>
