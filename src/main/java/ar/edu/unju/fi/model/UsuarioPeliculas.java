@@ -22,5 +22,45 @@ public class UsuarioPeliculas {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name ="idPelis")
   private Peliculas pelis;
-
+  private Integer valoracion;
+  private String Comentario;
+  public UsuarioPeliculas(Long idUsuarioPeli, Usuario usuario, Peliculas pelis, Integer valoracion,String Comentario) {
+    this.idUsuarioPeli = idUsuarioPeli;
+    this.usuario = usuario;
+    this.pelis = pelis;
+    this.valoracion = valoracion;
+    this.Comentario = Comentario;
+  }
+  public UsuarioPeliculas() {
+  }
+  public String getComentario() {
+    return Comentario;
+  }
+  public void setComentario(String comentario) {
+    Comentario = comentario;
+  }
+  public Long getIdUsuarioPeli() {
+    return idUsuarioPeli;
+  }
+  public void setIdUsuarioPeli(Long idUsuarioPeli) {
+    this.idUsuarioPeli = idUsuarioPeli;
+  }
+  public Usuario getUsuario() {
+    return usuario;
+  }
+  public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+  }
+  public Peliculas getPelis() {
+    return pelis;
+  }
+  public void setPelis(Peliculas pelis) {
+    this.pelis = pelis;
+  }
+  public Integer getValoracion() {
+    return valoracion;
+  }
+  public void setValoracion(Integer valoracion) {
+    this.valoracion = valoracion;
+  }
 }

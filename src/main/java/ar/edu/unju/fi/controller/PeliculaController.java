@@ -1,6 +1,9 @@
 package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +22,11 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ar.edu.unju.fi.model.Peliculas;
+import ar.edu.unju.fi.model.Usuario;
+import ar.edu.unju.fi.model.UsuarioPeliculas;
 import ar.edu.unju.fi.service.IPeliculasService;
+import ar.edu.unju.fi.service.IUsuarioPeliculaService;
+import ar.edu.unju.fi.service.IUsuarioService;
 import ar.edu.unju.fi.util.ListaPeli;
 
 @Controller
@@ -34,6 +41,10 @@ public class PeliculaController {
 
   @Autowired
   IPeliculasService peliculasService;
+  @Autowired
+  IUsuarioPeliculaService usuarioPeliculaService;
+  @Autowired
+  IUsuarioService usuarioService;
 
   @GetMapping("/formulariopeliculas")
   public ModelAndView addPeli() {
@@ -133,11 +144,6 @@ public class PeliculaController {
     LUCAS.info(peliculaencontrada.getDescripcion());
     LUCAS.fatal("Saliendo del metodo encontrado pelis ");
     return encontrado;
-  }
-  @PostMapping("/valorar/{id}")
-  public ModelAndView valorar(Model model, @PathVariable(name="id")Long id){
-    ModelAndView vista=new ModelAndView("pelicula");
-		return vista;
   }
 }
 
