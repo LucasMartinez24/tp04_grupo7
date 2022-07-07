@@ -44,4 +44,17 @@ public class IUsuarioPeliculaServiceimp implements IUsuarioPeliculaService{
 		auxiliar=(List<UsuarioPeliculas>) usuarioPeliculasRepository.findAll();	
 		return auxiliar;
 	}
+	/*@Override
+	public UsuarioPeliculas eliminarUsuarioPeliculas(Long id) throws Exception {
+		UsuarioPeliculas auxiliar =new UsuarioPeliculas();
+		auxiliar=buscarUsuarioPeliculas(id);
+		usuarioPeliculasRepository.delete(auxiliar);
+		return auxiliar;
+	}
+	@Override
+	public UsuarioPeliculas buscarUsuarioPeliculas(Long id) throws Exception{
+		UsuarioPeliculas usuarioPeliculasEncontrado = new UsuarioPeliculas();
+		usuarioPeliculasEncontrado=usuarioPeliculasRepository.findByIdUsuario(id).orElseThrow(()->new Exception("usuario no encontrado"));
+		return usuarioPeliculasEncontrado;
+	}*/
 }

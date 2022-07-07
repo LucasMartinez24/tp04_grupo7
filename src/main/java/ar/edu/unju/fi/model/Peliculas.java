@@ -28,8 +28,8 @@ public class Peliculas {
 	@NotEmpty(message="El nombre no puede estar vacio")
   private String titulo;
   @NotEmpty
-  @Min(value=1000000,message = "El DNI debe ser mayor al millon")
-  @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
+  @Min(value= 3,message = "El DNI debe ser mayor al millon")
+  @Max(value = 100, message = "El genero debe tener mas de 3 caracteres")
   private String genero;
   @NotEmpty
   @Min(value=1000000,message = "El DNI debe ser mayor al millon")
