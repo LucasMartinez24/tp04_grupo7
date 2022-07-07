@@ -59,6 +59,6 @@ public class MenuController {
 			return "Login";	
     }
 		model.addAttribute("unUsuario", user);			
-		return "index";
+		return "Login";
   }
 }
