@@ -1,0 +1,99 @@
+.container{
+  width: 400px;
+  display: flex;
+  padding: 20px 30px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .star-widget input{
+  display: none;
+}
+.star-widget label{
+  font-size: 40px;
+  color: #444;
+  padding: 10px;
+  float: right;
+  transition: all 0.2s ease;
+}
+.star-widget input:not(:checked) ~ label:hover,.star-widget input:not(:checked) ~ label:hover ~ label{
+  color: #fd4;
+}
+input:checked ~ label{
+  color: #fd4;
+}
+input#rate-5:checked ~ label{
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+
+.testimonios{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+.testimonios_header{
+  margin: 50px 0px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.testimonios_header h1{
+  font-size: 2.9rem;
+  font-weight: 500;
+  color: white;
+  padding: 10px 20px;
+}
+.testimonios_header span{
+  font-size: 2.2rem;
+  color: rgb(168, 168, 168);
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+.testimonios_contenedor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.testimonios_caja{
+  width: 500px;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+  margin: 15px;
+  cursor: pointer;
+}
+.perfil{
+  display: flex;
+  align-items: center;
+}
+.name-user{
+  display: flex;
+  flex-direction: column;
+}
+.name-user strong{
+  color: #3d3d3d;
+  font-size: 1.3rem;
+}
+.name-user span{
+  color: #979797;
+  font-size: 1.1rem;
+}
+.reseñas{
+  color: #f9d71c;
+}
+.caja-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.comentarios_clientes{
+  color: #4b4b4b;
+}

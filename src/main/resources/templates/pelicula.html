@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{/css/nav.css}">
   <link rel="stylesheet" th:href="@{/css/peli.css}">
+  <link rel="stylesheet" th:href="@{/css/valo.css}">
   <title>Pelicula</title>
 </head>
 <body>
@@ -18,24 +19,62 @@
 			<div class="contenedor">
 				<h3 class="titulo" th:text="${movie.titulo}"></h3>
 				<p class="descripcion" th:text="${movie.descripcion}"></p>
-				<button role="button" class="boton"><a href="https://www.youtube.com/watch?v=L7ZgQfnAjx4"><i class="fa-solid fa-play"></i>Reproducir</a></button>
-				<button class="boton"><a class="hero_cta" th:onclick="'confirmarValorar(\''+${movie.id}+'\');'"><i class="fa-solid fa-star"></i>Valorar</a></button>
+				<button role="button" class="boton"><a><i class="fa-solid fa-play"></i>Reproducir</a></button>
+				<button class="boton"><a href="#" class="hero_cta"><i class="fa-solid fa-star"></i>Valorar</a></button>
 			</div>
 		</div>
 	</main>
+  <section class="testimonios">
+    <div class="testimonios_header">
+      <span>Comentarios</span>
+      <h1>Clientes dicen</h1>
+    </div>
+    <div class="testimonios_caja" th:each="c : ${listacomentarios}">
+      <div class="caja-top">
+        <div class="perfil">
+          <div class="name-user">
+            <strong th:text="${c.usuario.usuario}"></strong>
+            <span th:text="${c.usuario.email}"></span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="comentarios_clientes">
+        <p th:text="${c.Comentario}"></p>
+      </div>
+    </div>
+  </section>
 	<section class="modal" id="modalValorar">
     <div class="modal_container">
         <h2 class="modal_title" id="valorarModalTitulo">Valorar</h2>
         <p class="modal_paragraph">¿Que valoración le darias a esta pelicula?</p>
-        <form>
-          <input type="text" id="identificadorDePelicula">
+        <form th:object="${valor}" th:action="@{/valorar}" method="post">
+          <input type="hidden" th:field="*{pelis}">
+          <input type="hidden" th:field="*{usuario}">
+          <div class="container">
+            <div class="star-widget">
+              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-5" value="5">
+              <label for="rate-5"><i class="fas fa-star"></i></label>
+              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-4" value="4">
+              <label for="rate-4"><i class="fas fa-star"></i></label>
+              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-3" value="3">
+              <label for="rate-3"><i class="fas fa-star"></i></label>
+              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-2" value="2">
+              <label for="rate-2"><i class="fas fa-star"></i></label>
+              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-1" value="1">
+              <label for="rate-1"><i class="fas fa-star"></i></label>
+            </div>
+          </div>
+          <label>Escribenos un comentario</label>
+          <textarea th:field="*{Comentario}"></textarea>
           <button type="submit">valorar</button>
         </form>
         <a href="#" class="modal_close">Cerrar Modal</a>
     </div>
   </section>
 	<script src="https://kit.fontawesome.com/1b33cce3bc.js" crossorigin="anonymous"></script>
-  <script th:src="@{/js/modalvalo}"></script>
+  <script th:src="@{/js/modalvalo.js}"></script>
   <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
+  <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

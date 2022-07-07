@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,6 @@ public class IUsuarioPeliculaServiceimp implements IUsuarioPeliculaService{
   UsuarioPeliculas nuevo;
   @Autowired
   UsuarioPeliculasRepository usuarioPeliculasRepository;
-  @Override
-  public void guardarValoracion(UsuarioPeliculas unaValoracion) {
-    usuarioPeliculasRepository.save(unaValoracion);
-  }
-
-  @Override
-  public UsuarioPeliculas crearValoracion() {
-    return nuevo;
-  }
 
   @Override
   public Integer verificarValoracionAnterio(Usuario usuario, Long id) {
@@ -46,5 +38,10 @@ public class IUsuarioPeliculaServiceimp implements IUsuarioPeliculaService{
 		}
 		return contadorDeComentariosEnUnapelicula;
   }
-  
+  @Override
+	public List<UsuarioPeliculas> listarUsuarioPeliculas() {
+		List<UsuarioPeliculas> auxiliar = new ArrayList<>();
+		auxiliar=(List<UsuarioPeliculas>) usuarioPeliculasRepository.findAll();	
+		return auxiliar;
+	}
 }

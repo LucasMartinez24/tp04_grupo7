@@ -1,5 +1,5 @@
 var exampleModal = document.getElementById('modalValorar')
-const openModal = document.querySelector('.boton');
+const openModal = document.querySelector('.hero_cta');
 console.log(openModal);
 const modal = document.querySelector('.modal');
 const closeModal = document.querySelector('.modal_close');
@@ -11,12 +11,3 @@ closeModal.addEventListener('click', (e)=>{
     e.preventDefault();
     modal.classList.remove('modal--show');
 });
-
-function confirmarvalorar(id) {
-	$("#identificadorDePelicula").val(id);
-}
-
-function valorarPelicula() {
-	var id = $("#identificadorDePelicula").val();
-    window.location = "/eliminarPeli/" + id;
-}

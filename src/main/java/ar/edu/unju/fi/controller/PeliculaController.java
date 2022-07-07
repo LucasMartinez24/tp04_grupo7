@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import ar.edu.unju.fi.model.Peliculas;
 import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.model.UsuarioPeliculas;
+import ar.edu.unju.fi.repository.UsuarioPeliculasRepository;
 import ar.edu.unju.fi.service.IPeliculasService;
 import ar.edu.unju.fi.service.IUsuarioPeliculaService;
 import ar.edu.unju.fi.service.IUsuarioService;
@@ -45,6 +46,8 @@ public class PeliculaController {
   IUsuarioPeliculaService usuarioPeliculaService;
   @Autowired
   IUsuarioService usuarioService;
+  @Autowired
+  UsuarioPeliculasRepository usuarioPeliculasRepository;
 
   @GetMapping("/formulariopeliculas")
   public ModelAndView addPeli() {
@@ -127,7 +130,7 @@ public class PeliculaController {
   @GetMapping("/eliminarPeli/{id}")
   public String eliminar(@PathVariable Long id, Model model) {
     try {
-      peliculasService.eliminarPeliculas(id);;
+      peliculasService.eliminarPeliculas(id);
     } catch (Exception e) {
       LUCAS.error("encontrando curso");
       model.addAttribute("formUsuarioErrorMessage", e.getMessage());
@@ -138,12 +141,29 @@ public class PeliculaController {
   @GetMapping("/descripcion/{id}")
   public ModelAndView descrip(@PathVariable(name = "id") Long id) throws Exception{
     Peliculas peliculaencontrada = new Peliculas();
+    UsuarioPeliculas usuarioPeliculas =new UsuarioPeliculas();
     ModelAndView encontrado = new ModelAndView("pelicula");
     peliculaencontrada = peliculasService.buscarPeliculas(id);
     encontrado.addObject("movie", peliculaencontrada);
+    Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+    Usuario userEnSesion = usuarioService.buscarUsuario(Long.parseLong(userDetail.getUsername()));
+    LUCAS.info(userEnSesion.getDni());
+    usuarioPeliculas.setUsuario(userEnSesion);
+    usuarioPeliculas.setPelis(peliculaencontrada);
+    encontrado.addObject("valor", usuarioPeliculas);
+    encontrado.addObject("listacomentarios", usuarioPeliculaService.listarUsuarioPeliculas());
     LUCAS.info(peliculaencontrada.getDescripcion());
     LUCAS.fatal("Saliendo del metodo encontrado pelis ");
     return encontrado;
+  }
+  @PostMapping("/valorar")
+  public String valorar(@ModelAttribute("valoracion") UsuarioPeliculas unaValoracion) throws Exception{
+    LUCAS.info(unaValoracion.getPelis());
+    usuarioPeliculasRepository.save(unaValoracion);
+    return "redirect:/listapeliculas";
   }
 }
 

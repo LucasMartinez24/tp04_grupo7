@@ -1,10 +1,11 @@
 package ar.edu.unju.fi.service;
 
+import java.util.List;
+
 import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.model.UsuarioPeliculas;
 
 public interface IUsuarioPeliculaService {
-  public void guardarValoracion(UsuarioPeliculas unaValoracion);
-	public UsuarioPeliculas crearValoracion();
-  public Integer verificarValoracionAnterio(Usuario turista, Long id);
+  public Integer verificarValoracionAnterio(Usuario usuario, Long id);
+  public List<UsuarioPeliculas> listarUsuarioPeliculas();
 }
