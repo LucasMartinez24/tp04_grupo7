@@ -6,33 +6,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{/css/styles.css}">
   <link rel="stylesheet" th:href="@{/css/portada.css}">
+  <link rel="stylesheet" th:href="@{css/footer.css}">
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
   <title>Inicio</title>
 </head>
 <body>
   <header>
     <div th:insert="/layouts/navadmin :: nav"></div>
-  </header>
+</header>
 
-  <main>
-		<div class="pelicula-principal">
-			<div class="contenedor">
-				<h3 class="titulo">SpidermanAdmin</h3>
-				<p class="descripcion">
-					La vida de Peter Parker no es como la de cualquier adolescente. El joven compagina su tiempo luchando contra el mal convertido en Spider-Man y estudiando en el instituto junto con la chica a la que quiere, Gwen.
-				</p>
-				<button role="button" class="boton"><i class="fas fa-play"></i>Reproducir</button>
-				<button role="button" class="boton"><i class="fas fa-info-circle"></i>Más información</button>
-			</div>
-		</div>
-	</main>
-	
-	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-	<script src="js/portada.js"></script>
+<main>
+	  <div class="pelicula-principal">
+		  <div class="contenedor">
+			  <h3 class="titulo">Supaidaman<h3>
+			  <p class="descripcion">
+				  La vida de Peter Parker no es como la de cualquier adolescente. El joven compagina su tiempo luchando contra el mal convertido en Spider-Man y estudiando en el instituto junto con la chica a la que quiere, Gwen.
+			  </p>
+			  <button role="button" class="boton"><i class="fas fa-play"></i>Reproducir</button>
+			  <button role="button" class="boton"><i class="fas fa-info-circle"></i>Más información</button>
+		  </div>
+	  </div> 
 
-  <section class="banner">
 
-  </section>
-  <script th:src="@{/js/main.js}"></script>
+	  <div class="peliculas-recomendadas contenedor">
+		  <div class="contenedor-titulo-controles">
+			  <h3 style="color:white">Películas Recomendadas</h3>
+			  <div class="indicadores"></div>
+		  </div>
+
+		  <div class="contenedor-principal">
+			  <button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>
+
+			  <div class="contenedor-carousel">
+				  <div class="carousel">
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/7.jpg" alt=""></a>
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/2.jpg" alt=""></a>						
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/3.jpg" alt=""></a>
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/9.jpg" alt=""></a>
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/15.jpg" alt=""></a>						
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/16.jpg" alt=""></a>						
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/7.jpg" alt=""></a>
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/2.jpg" alt=""></a>						
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/3.jpg" alt=""></a>
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/9.jpg" alt=""></a>
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/15.jpg" alt=""></a>						
+					  </div>
+					  <div class="pelicula">
+						  <a href="#"><img src="/img/16.jpg" alt=""></a>						
+					  </div>
+				  </div>
+			  </div>
+
+			  <button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>
+		  </div>
+	  </div>
+
+	  
+  </main>
+  
+  <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+  <script src="js/portada.js"></script>
+
+<section class="banner">
+
+</section>
+<script th:src="@{/js/main.js}"></script>
+<footer>
+
+  <div class="container__footer">
+	  <div class="box__footer">
+		  
+		  <div class="terms">
+			  <p>Integrantes del DreamTeam:</p>
+			  <p>-Lucas Salvador Martinez</p>
+			  <p>-Nicolas Gaston Torrico</p>
+			  <p>-Lucas Rodriguez Llado</p>
+			  <p>-Sebastian Diaz </p>
+		  </div>
+	  </div>
+	  <div class="box__footer">
+		  <h2>Soluciones</h2>
+		  <a href="https://www.google.com">App Desarrollo</a>
+		  <a href="#">App Marketing</a>
+		  <a href="#">IOS Desarrollo</a>
+		  <a href="#">Android Desarrollo</a>
+	  </div>
+
+	  <div class="box__footer">
+		  <h2>Compañia</h2>
+		  <a href="#">Acerca de</a>
+		  <a href="#">Trabajos</a>
+		  <a href="#">Procesos</a>
+		  <a href="#">Servicios</a>              
+	  </div>
+
+	  <div class="box__footer">
+		  <h2>Redes Sociales</h2>
+		  <a href="#"> <i class="fab fa-facebook-square"></i> Facebook</a>
+		  <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+		  <a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
+		  <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+	  </div>
+
+  </div>
+
+  <div class="box__copyright">
+	  <hr>
+	  <p>Todos los derechos reservados © 2022 <b>GRUPO7</b></p>
+  </div>
+</footer>
 </body>
+
 </html>
