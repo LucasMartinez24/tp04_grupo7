@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{/css/styles.css}">
   <link rel="stylesheet" th:href="@{/css/listpelis.css}">
+  <link rel="stylesheet" th:href="@{/css/nav.css}">
   <link rel="stylesheet" th:href="@{/css/swiper-bundle.min.css}"/>
   <title>Document</title>
 </head>
@@ -28,7 +29,7 @@
             </div>
             <div class="actionBtn">
               <button>Comprar</button>
-              <button>Descripción</button>
+              <button><a class="hero_cta" th:href="@{'/descripcion/'+ ${p.id}}">Descripción</a></button>
             </div>
           </div>
         </div>
