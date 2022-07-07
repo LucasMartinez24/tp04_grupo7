@@ -5,12 +5,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/portada.css}">
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
   <title>Inicio</title>
 </head>
 <body>
   <header>
     <div th:insert="/layouts/nav :: nav"></div>
   </header>
+
+  <main>
+		<div class="pelicula-principal">
+			<div class="contenedor">
+				<h3 class="titulo">Supaidaman<h3>
+				<p class="descripcion">
+					La vida de Peter Parker no es como la de cualquier adolescente. El joven compagina su tiempo luchando contra el mal convertido en Spider-Man y estudiando en el instituto junto con la chica a la que quiere, Gwen.
+				</p>
+				<button role="button" class="boton"><i class="fas fa-play"></i>Reproducir</button>
+				<button role="button" class="boton"><i class="fas fa-info-circle"></i>Más información</button>
+			</div>
+		</div>
+	</main>
+	
+	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+	<script src="js/portada.js"></script>
+
   <section class="banner">
 
   </section>
