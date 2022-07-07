@@ -124,4 +124,20 @@ public class PeliculaController {
     }
     return "redirect:/listapeliculas2";
   }
+  @GetMapping("/descripcion/{id}")
+  public ModelAndView descrip(@PathVariable(name = "id") Long id) throws Exception{
+    Peliculas peliculaencontrada = new Peliculas();
+    ModelAndView encontrado = new ModelAndView("pelicula");
+    peliculaencontrada = peliculasService.buscarPeliculas(id);
+    encontrado.addObject("movie", peliculaencontrada);
+    LUCAS.info(peliculaencontrada.getDescripcion());
+    LUCAS.fatal("Saliendo del metodo encontrado pelis ");
+    return encontrado;
+  }
+  @PostMapping("/valorar/{id}")
+  public ModelAndView valorar(Model model, @PathVariable(name="id")Long id){
+    ModelAndView vista=new ModelAndView("pelicula");
+		return vista;
+  }
 }
+

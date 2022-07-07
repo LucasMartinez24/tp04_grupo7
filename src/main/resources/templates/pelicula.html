@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/nav.css}">
+  <link rel="stylesheet" th:href="@{/css/peli.css}">
+  <title>Pelicula</title>
+</head>
+<body>
+  <header>
+    <div th:insert="/layouts/navcliente :: nav"></div>
+  </header>
+  <main th:object="${movie}">
+		<div class="pelicula-principal">
+      <img th:src="${'data:image/jpg;base64,'+ movie.portada}">
+			<div class="contenedor">
+				<h3 class="titulo" th:text="${movie.titulo}"></h3>
+				<p class="descripcion" th:text="${movie.descripcion}"></p>
+				<button role="button" class="boton"><a href="https://www.youtube.com/watch?v=L7ZgQfnAjx4"><i class="fa-solid fa-play"></i>Reproducir</a></button>
+				<button role="button" class="boton"><i class="fa-solid fa-star"></i>Valorar</button>
+			</div>
+		</div>
+	</main>
+	
+	<script src="https://kit.fontawesome.com/1b33cce3bc.js" crossorigin="anonymous"></script>
+</body>
+</html>
