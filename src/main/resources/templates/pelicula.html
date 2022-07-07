@@ -7,6 +7,7 @@
   <link rel="stylesheet" th:href="@{/css/nav.css}">
   <link rel="stylesheet" th:href="@{/css/peli.css}">
   <link rel="stylesheet" th:href="@{/css/valo.css}">
+  <link rel="stylesheet" th:href="@{css/footer.css}">
   <title>Pelicula</title>
 </head>
 <body>
@@ -72,6 +73,9 @@
         <a href="#" class="modal_close">Cerrar Modal</a>
     </div>
   </section>
+  <footer>
+    <div th:insert="/layouts/footer :: footer"></div>
+  </footer>
 	<script src="https://kit.fontawesome.com/1b33cce3bc.js" crossorigin="anonymous"></script>
   <script th:src="@{/js/modalvalo.js}"></script>
   <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>

@@ -7,6 +7,7 @@
   <link rel="stylesheet" th:href="@{/css/styles.css}">
   <link rel="stylesheet" th:href="@{/css/nav.css}">
   <link rel="stylesheet" th:href="@{/css/formpelis.css}">
+  <link rel="stylesheet" th:href="@{css/footer.css}">
   <title>Document</title>
 </head>
 <body>
@@ -66,6 +67,9 @@
       </div>
     </div>
   </form>
+  <footer>
+    <div th:insert="/layouts/footer :: footer"></div>
+  </footer>
   <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
