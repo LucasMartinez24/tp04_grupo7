@@ -18,5 +18,5 @@ function confirmarvalorar(id) {
 
 function valorarPelicula() {
 	var id = $("#identificadorDePelicula").val();
-	window.location = "/descripcion/" + id;
+    window.location = "/eliminarPeli/" + id;
 }

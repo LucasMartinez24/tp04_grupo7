@@ -19,7 +19,7 @@
 				<h3 class="titulo" th:text="${movie.titulo}"></h3>
 				<p class="descripcion" th:text="${movie.descripcion}"></p>
 				<button role="button" class="boton"><a href="https://www.youtube.com/watch?v=L7ZgQfnAjx4"><i class="fa-solid fa-play"></i>Reproducir</a></button>
-				<button role="button" class="boton"><i class="fa-solid fa-star"></i>Valorar</button>
+				<button class="boton"><a class="hero_cta" th:onclick="'confirmarValorar(\''+${movie.id}+'\');'"><i class="fa-solid fa-star"></i>Valorar</a></button>
 			</div>
 		</div>
 	</main>
@@ -35,7 +35,7 @@
     </div>
   </section>
 	<script src="https://kit.fontawesome.com/1b33cce3bc.js" crossorigin="anonymous"></script>
-  <script th:src="/js/modalvalo"></script>
+  <script th:src="@{/js/modalvalo}"></script>
   <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>
