@@ -27,7 +27,7 @@ public class LoginService implements UserDetailsService{
     Usuario usuarioenc = usuarioRepository.findById(Long.parseLong(dni)).orElseThrow(()-> new UsernameNotFoundException("Usuario invalido"));
     //definir autorizaciones
     List<GrantedAuthority> estados= new ArrayList<>();
-    GrantedAuthority grantedAuthority= new SimpleGrantedAuthority(usuarioenc.getEstado());
+    GrantedAuthority grantedAuthority= new SimpleGrantedAuthority(usuarioenc.getTipo());
     estados.add(grantedAuthority);
     //Definir usuario en sesion
     UserDetails userEnSesion = new User(dni,usuarioenc.getContraseña(),estados);

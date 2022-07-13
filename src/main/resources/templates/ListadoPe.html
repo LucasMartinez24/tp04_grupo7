@@ -29,8 +29,8 @@
               <span class="aux"><h3 th:text="${p.sala}"></h3><span>Sala</span></span>
             </div>
             <div class="actionBtn">
-              <button>Comprar</button>
-              <button><a class="hero_cta" th:href="@{'/descripcion/'+ ${p.id}}">Descripción</a></button>
+              <button><a class="hero_cta" th:onclick="'confirmarComprar(\''+${p.id}+'\');'">Comprar</a></button>
+              <button><a class="descrip" th:href="@{'/descripcion/'+ ${p.id}}">Descripción</a></button>
             </div>
           </div>
         </div>
@@ -39,9 +39,21 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </section>
-
+  <section class="modal" id="modalComprar">
+    <div class="modal_container">
+        <h2 class="modal_title" id="comprarModalTitulo">Comprar</h2>
+        <p class="modal_paragraph">¿Seguro que quieres comprar una entrada para esta pelicula?</p>
+        <form>
+          <input type="text" id="identificadorDeEntrada">
+        </form>
+        <button type="button" th:onclick="comprarEntrada()">Comprar</button>
+        <a href="#" class="modal_close">Cerrar Modal</a>
+    </div>
+  </section>
   <script th:src="@{/js/main.js}"></script>
   <script th:src="@{/js/swiper-bundle.min.js}"></script>
   <script th:src="@{/js/carru.js}"></script>
+  <script th:src="@{/js/modalcompra.js}"></script>
+  <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}" type="text/javascript" src="webjars/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>

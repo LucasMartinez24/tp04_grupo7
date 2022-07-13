@@ -24,10 +24,12 @@ import org.apache.commons.logging.LogFactory;
 import ar.edu.unju.fi.model.Peliculas;
 import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.model.UsuarioPeliculas;
+import ar.edu.unju.fi.model.ValoracionUsuarioPeliculas;
 import ar.edu.unju.fi.repository.UsuarioPeliculasRepository;
 import ar.edu.unju.fi.service.IPeliculasService;
 import ar.edu.unju.fi.service.IUsuarioPeliculaService;
 import ar.edu.unju.fi.service.IUsuarioService;
+import ar.edu.unju.fi.service.ValoracionUsuarioPeliculasService;
 import ar.edu.unju.fi.util.ListaPeli;
 
 @Controller
@@ -48,7 +50,8 @@ public class PeliculaController {
   IUsuarioService usuarioService;
   @Autowired
   UsuarioPeliculasRepository usuarioPeliculasRepository;
-
+  @Autowired
+  ValoracionUsuarioPeliculasService valoracionUsuarioPeliculasService;
   @GetMapping("/formulariopeliculas")
   public ModelAndView addPeli() {
     ModelAndView vista = new ModelAndView("formulariopeliculas");
@@ -58,7 +61,7 @@ public class PeliculaController {
   }
 
   @PostMapping(value="/formulariopeliculas",consumes= "multipart/form-data")
-  public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas, BindingResult resultado,@RequestParam("file") MultipartFile file, Model model) {
+  public String savePeli(@Valid @ModelAttribute("Peli") Peliculas peliculas,BindingResult resultado,@RequestParam("file") MultipartFile file, Model model) {
     LUCAS.info(peliculas.getId());
     if (resultado.hasErrors()) {
       LUCAS.fatal("Error de validación en guardar peli");
@@ -70,6 +73,7 @@ public class PeliculaController {
       byte[] content = file.getBytes();
       String base64 = Base64.getEncoder().encodeToString(content);
       peliculas.setPortada(base64);
+      peliculas.setEstado(true);
       peliculasService.guardarPeliculas(peliculas);
     } catch (Exception e) {
       model.addAttribute("formUsuarioErrorMessage", e.getMessage());
@@ -82,7 +86,7 @@ public class PeliculaController {
     return "redirect:/listapeliculas2";
   }
   @GetMapping("/listapeliculas")
-  public ModelAndView getlista() {
+  public ModelAndView getlista() throws Exception {
     ModelAndView vista = new ModelAndView("ListadoPe");
     vista.addObject("listaPelis", peliculasService.listarPeliculas());
     LUCAS.info("Ingresando al metodo listar Pelis");
@@ -141,7 +145,7 @@ public class PeliculaController {
   @GetMapping("/descripcion/{id}")
   public ModelAndView descrip(@PathVariable(name = "id") Long id) throws Exception{
     Peliculas peliculaencontrada = new Peliculas();
-    UsuarioPeliculas usuarioPeliculas =new UsuarioPeliculas();
+    ValoracionUsuarioPeliculas valoracionUsuarioPeliculas =new ValoracionUsuarioPeliculas();
     ModelAndView encontrado = new ModelAndView("pelicula");
     peliculaencontrada = peliculasService.buscarPeliculas(id);
     encontrado.addObject("movie", peliculaencontrada);
@@ -151,19 +155,47 @@ public class PeliculaController {
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
     Usuario userEnSesion = usuarioService.buscarUsuario(Long.parseLong(userDetail.getUsername()));
     LUCAS.info(userEnSesion.getDni());
-    usuarioPeliculas.setUsuario(userEnSesion);
-    usuarioPeliculas.setPelis(peliculaencontrada);
-    encontrado.addObject("valor", usuarioPeliculas);
-    encontrado.addObject("listacomentarios", usuarioPeliculaService.listarUsuarioPeliculas());
+    valoracionUsuarioPeliculas.setUsuario(userEnSesion);
+    valoracionUsuarioPeliculas.setPelis(peliculaencontrada);
+    encontrado.addObject("valoracion", valoracionUsuarioPeliculas);
+    encontrado.addObject("listacomentarios", valoracionUsuarioPeliculasService.ListarValoracion(peliculaencontrada));
+    encontrado.addObject("promedio", valoracionUsuarioPeliculasService.promedio(valoracionUsuarioPeliculasService.ListarValoracion(peliculaencontrada)));
     LUCAS.info(peliculaencontrada.getDescripcion());
     LUCAS.fatal("Saliendo del metodo encontrado pelis ");
     return encontrado;
   }
   @PostMapping("/valorar")
-  public String valorar(@ModelAttribute("valoracion") UsuarioPeliculas unaValoracion) throws Exception{
-    LUCAS.info(unaValoracion.getPelis());
-    usuarioPeliculasRepository.save(unaValoracion);
+  public String valorar(@ModelAttribute("valoracion") ValoracionUsuarioPeliculas unaValoracion) throws Exception{
+    LUCAS.info(unaValoracion.getUsuario());
+    valoracionUsuarioPeliculasService.guardarValoracion(unaValoracion);
     return "redirect:/listapeliculas";
+  }
+  @GetMapping("/entradas")
+  public ModelAndView MisEntradas() throws Exception{
+    ModelAndView vista= new ModelAndView("misEntradas");
+    Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+    Usuario userEnSesion = usuarioService.buscarUsuario(Long.parseLong(userDetail.getUsername()));
+    vista.addObject("entradas", usuarioPeliculaService.listarUsuarioPeliculas(userEnSesion));
+    LUCAS.info("Ingresando al metodo listar entradas");
+    return vista;
+  }
+  @GetMapping("/comprarEntrada/{id}")
+  public String comprarar(@PathVariable Long id, Model model) throws Exception {
+    Peliculas peliculas=new Peliculas();
+    UsuarioPeliculas usuarioPeliculas=new UsuarioPeliculas();
+    peliculas=peliculasService.buscarPeliculas(id);
+    Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+    Usuario userEnSesion = usuarioService.buscarUsuario(Long.parseLong(userDetail.getUsername()));
+    usuarioPeliculas.setPelis(peliculas);
+    usuarioPeliculas.setUsuario(userEnSesion);
+    usuarioPeliculaService.agregarentrada(usuarioPeliculas);
+    return "redirect:/entradas";
   }
 }
 

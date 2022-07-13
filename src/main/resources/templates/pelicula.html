@@ -19,6 +19,7 @@
       <img th:src="${'data:image/jpg;base64,'+ movie.portada}">
 			<div class="contenedor">
 				<h3 class="titulo" th:text="${movie.titulo}"></h3>
+        <p>Valoracion: <span th:text="${promedio}"></span></p>
 				<p class="descripcion" th:text="${movie.descripcion}"></p>
 				<button role="button" class="boton"><a><i class="fa-solid fa-play"></i>Reproducir</a></button>
 				<button class="boton"><a href="#" class="hero_cta"><i class="fa-solid fa-star"></i>Valorar</a></button>
@@ -30,6 +31,9 @@
       <span>Comentarios</span>
       <h1>Clientes dicen</h1>
     </div>
+    <div th:if="${listacomentarios.empty}">
+      <h1>No hay comentarios</h1>
+    </div>
     <div class="testimonios_caja" th:each="c : ${listacomentarios}">
       <div class="caja-top">
         <div class="perfil">
@@ -38,7 +42,6 @@
             <span th:text="${c.usuario.email}"></span>
           </div>
         </div>
-        
       </div>
       <div class="comentarios_clientes">
         <p th:text="${c.Comentario}"></p>
@@ -49,20 +52,20 @@
     <div class="modal_container">
         <h2 class="modal_title" id="valorarModalTitulo">Valorar</h2>
         <p class="modal_paragraph">¿Que valoración le darias a esta pelicula?</p>
-        <form th:object="${valor}" th:action="@{/valorar}" method="post">
+        <form th:object="${valoracion}" th:action="@{/valorar}" method="post">
           <input type="hidden" th:field="*{pelis}">
-          <input type="hidden" th:field="*{usuario}">
+          <input type="hidden" th:field="*{usuario}"> 
           <div class="container">
             <div class="star-widget">
-              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-5" value="5">
+              <input th:field="*{valor}" type="radio" name="rate" id="rate-5" value="5">
               <label for="rate-5"><i class="fas fa-star"></i></label>
-              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-4" value="4">
+              <input th:field="*{valor}" type="radio" name="rate" id="rate-4" value="4">
               <label for="rate-4"><i class="fas fa-star"></i></label>
-              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-3" value="3">
+              <input th:field="*{valor}" type="radio" name="rate" id="rate-3" value="3">
               <label for="rate-3"><i class="fas fa-star"></i></label>
-              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-2" value="2">
+              <input th:field="*{valor}" type="radio" name="rate" id="rate-2" value="2">
               <label for="rate-2"><i class="fas fa-star"></i></label>
-              <input th:field="*{valoracion}" type="radio" name="rate" id="rate-1" value="1">
+              <input th:field="*{valor}" type="radio" name="rate" id="rate-1" value="1">
               <label for="rate-1"><i class="fas fa-star"></i></label>
             </div>
           </div>

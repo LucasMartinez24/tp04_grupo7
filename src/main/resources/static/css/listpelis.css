@@ -119,6 +119,9 @@ body{
   color: #999;
   background: #fff;
 }
+.card .content .details .actionBtn button .descrip{
+  color: #999;
+}
 .card .content .details .actionBtn button .hero_cta{
   color: #999;
 }

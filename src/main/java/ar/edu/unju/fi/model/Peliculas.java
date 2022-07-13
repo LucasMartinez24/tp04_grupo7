@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.persistence.GenerationType;
@@ -28,36 +26,49 @@ public class Peliculas {
 	@NotEmpty(message="El nombre no puede estar vacio")
   private String titulo;
   @NotEmpty
-  @Min(value= 3,message = "El DNI debe ser mayor al millon")
-  @Max(value = 100, message = "El genero debe tener mas de 3 caracteres")
+  @Size(min= 3,max = 100, message = "El genero debe tener mas de 3 caracteres")
   private String genero;
   @NotEmpty
-  @Min(value=1000000,message = "El DNI debe ser mayor al millon")
-  @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
+  @Size(min=3,max = 100, message = "La duracion tiene que tener mas de 3 caracteres")
   private String duracion;
-  @NotEmpty
-  private Long sala;
   @Lob
   private String portada;
   @NotEmpty
-  @Min(value=1000000,message = "El DNI debe ser mayor al millon")
-  @Max(value = 999999999, message = "El DNI debe ser menor a 999999999")
+  @Size(min = 3,message = "La descripcion no puede ser menor a 3 caracteres")
   private String descripcion;
-  
+  @NotEmpty
+  private Long sala;
+  @NotEmpty
+  private Boolean estado;
   public Peliculas(Long id,
       @Size(min = 3, max = 100, message = "EL nombre debe tener 3 caracteres minimo, maximo 100") @NotEmpty(message = "El nombre no puede estar vacio") String titulo,
-      @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String genero,
-      @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String duracion,
-      @NotEmpty Long sala, String portada,
-      @NotEmpty @Min(value = 1000000, message = "El DNI debe ser mayor al millon") @Max(value = 999999999, message = "El DNI debe ser menor a 999999999") String descripcion) {
+      @NotEmpty @Size(min = 3, max = 100, message = "El genero debe tener mas de 3 caracteres") String genero,
+      @NotEmpty @Size(min = 3, max = 100, message = "La duracion tiene que tener mas de 3 caracteres") String duracion,
+      String portada,
+      @NotEmpty @Size(min = 3, message = "La descripcion no puede ser menor a 3 caracteres") String descripcion,
+      @NotEmpty Long sala, @NotEmpty Boolean estado) {
     this.id = id;
     this.titulo = titulo;
     this.genero = genero;
     this.duracion = duracion;
-    this.sala = sala;
     this.portada = portada;
     this.descripcion = descripcion;
+    this.sala = sala;
+    this.estado = estado;
   }
+  public Boolean getEstado() {
+    return estado;
+  }
+  public void setEstado(Boolean estado) {
+    this.estado = estado;
+  }
+  public Long getSala() {
+    return sala;
+  }
+  public void setSala(Long sala) {
+    this.sala = sala;
+  }
+  
   public Peliculas() {
     
   }
@@ -96,11 +107,5 @@ public class Peliculas {
   }
   public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
-  }
-  public Long getSala() {
-    return sala;
-  }
-  public void setSala(Long sala) {
-    this.sala = sala;
   }
 }
