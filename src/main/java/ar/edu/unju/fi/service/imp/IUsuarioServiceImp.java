@@ -29,6 +29,7 @@ public class IUsuarioServiceImp implements IUsuarioService{
 		String pw=usuario.getContraseña();
 		BCryptPasswordEncoder coder= new BCryptPasswordEncoder(4);
 		usuario.setContraseña(coder.encode(pw));
+		usuario.setEstado(true);
 		usuarioRepository.save(usuario);
 	}
 
@@ -36,7 +37,8 @@ public class IUsuarioServiceImp implements IUsuarioService{
 	public void eliminarUsuario(Long id) throws Exception{
 		Usuario auxiliar =new Usuario();
 		auxiliar=buscarUsuario(id);
-		usuarioRepository.delete(auxiliar);	
+		auxiliar.setEstado(false);
+		usuarioRepository.save(auxiliar);
 	}
 
 	@Override
@@ -48,12 +50,15 @@ public class IUsuarioServiceImp implements IUsuarioService{
 	public List<Usuario> listarUsuarios() {
 		LUCAS.info("ingresando al metodo mostrar");
 		List<Usuario> auxiliar = new ArrayList<>();
+		List<Usuario> auxiliar2 = new ArrayList<>();
 		auxiliar=(List<Usuario>) usuarioRepository.findAll();	
-		return auxiliar;
+		for (int i = 0; i < auxiliar.size(); i++) {
+			if(auxiliar.get(i).getEstado().equals(true)){
+				auxiliar2.add(auxiliar.get(i));
+			}
+		}
+		return auxiliar2;
 	}
-
-	
-
 	@Override
 	public Usuario buscarUsuario(Long id) throws Exception {
 		Usuario usuarioEncontrado = new Usuario();

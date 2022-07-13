@@ -9,52 +9,55 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.model.Usuario;
 import ar.edu.unju.fi.model.UsuarioPeliculas;
+import ar.edu.unju.fi.repository.PeliculasRepository;
 import ar.edu.unju.fi.repository.UsuarioPeliculasRepository;
 import ar.edu.unju.fi.service.IUsuarioPeliculaService;
 @Service
 public class IUsuarioPeliculaServiceimp implements IUsuarioPeliculaService{
   @Autowired
-  UsuarioPeliculas nuevo;
-  @Autowired
   UsuarioPeliculasRepository usuarioPeliculasRepository;
+  @Autowired
+  PeliculasRepository peliculasRepository;
+  @Override
+	public List<UsuarioPeliculas> listarUsuarioPeliculas(Usuario usuario) {
+		List<UsuarioPeliculas> auxiliar = new ArrayList<>();
+    List<UsuarioPeliculas> aux2=new ArrayList<>();
+		auxiliar=(List<UsuarioPeliculas>) usuarioPeliculasRepository.findAll();
+    for (int i = 0; i < auxiliar.size(); i++) {
+      if(auxiliar.get(i).getUsuario().equals(usuario)){
+        aux2.add(auxiliar.get(i));
+      }
+    }
+		return aux2;
+	}
 
   @Override
-  public Integer verificarValoracionAnterio(Usuario usuario, Long id) {
-    System.out.println("dentro de verificacion de valoracion");
-		List<UsuarioPeliculas> todasLasValoraciones=(List<UsuarioPeliculas>) usuarioPeliculasRepository.findAll();
-		int i;
-		Integer contadorDeComentariosEnUnapelicula=0;
-		
-		for(i=0;i<usuarioPeliculasRepository.count();i++) {
-			if(todasLasValoraciones.get(i).getValoracion()!=null) {
-				
-				if(todasLasValoraciones.get(i).getPelis().getId()==id) {
-					
-					if(todasLasValoraciones.get(i).getUsuario().getDni()==usuario.getDni()) {
-						contadorDeComentariosEnUnapelicula++;
-					}
-				}
-			}	
-		}
-		return contadorDeComentariosEnUnapelicula;
+  public void agregarentrada(UsuarioPeliculas usuarioPeliculas) {
+    List<UsuarioPeliculas> listausuario=new ArrayList<>();
+    Boolean existe=false;
+    listausuario=listarUsuarioPeliculas(usuarioPeliculas.getUsuario());
+    for (int i = 0; i < listausuario.size(); i++) {
+      if(listausuario.get(i).getPelis().equals(usuarioPeliculas.getPelis())){
+        System.out.println("Existe");
+        existe=true;
+      }
+    }
+    if(existe!=true){
+      usuarioPeliculasRepository.save(usuarioPeliculas);
+    }
   }
+
   @Override
-	public List<UsuarioPeliculas> listarUsuarioPeliculas() {
-		List<UsuarioPeliculas> auxiliar = new ArrayList<>();
-		auxiliar=(List<UsuarioPeliculas>) usuarioPeliculasRepository.findAll();	
-		return auxiliar;
-	}
-	/*@Override
-	public UsuarioPeliculas eliminarUsuarioPeliculas(Long id) throws Exception {
-		UsuarioPeliculas auxiliar =new UsuarioPeliculas();
-		auxiliar=buscarUsuarioPeliculas(id);
-		usuarioPeliculasRepository.delete(auxiliar);
-		return auxiliar;
-	}
-	@Override
-	public UsuarioPeliculas buscarUsuarioPeliculas(Long id) throws Exception{
-		UsuarioPeliculas usuarioPeliculasEncontrado = new UsuarioPeliculas();
-		usuarioPeliculasEncontrado=usuarioPeliculasRepository.findByIdUsuario(id).orElseThrow(()->new Exception("usuario no encontrado"));
-		return usuarioPeliculasEncontrado;
-	}*/
+  public Boolean existe(UsuarioPeliculas usuarioPeliculas) {
+    List<UsuarioPeliculas> listausuario=new ArrayList<>();
+    Boolean existe=false;
+    listausuario=listarUsuarioPeliculas(usuarioPeliculas.getUsuario());
+    for (int i = 0; i < listausuario.size(); i++) {
+      if(listausuario.get(i).getPelis().equals(usuarioPeliculas.getPelis())){
+        System.out.println("Existe");
+        existe=true;
+      }
+    }
+    return existe;
+  }
 }
