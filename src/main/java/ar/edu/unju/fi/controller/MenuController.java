@@ -61,4 +61,11 @@ public class MenuController {
 		model.addAttribute("unUsuario", user);			
 		return "Login";
   }
+ 
+@GetMapping("/error")
+  public String geterror(){
+    grupo7.fatal("Error de url");
+    return "error";
+  }
+
 }
